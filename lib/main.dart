@@ -10,11 +10,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Marvel Comics App Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
-      home: const Scaffold(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Marvel Comics App'),
+          centerTitle: true,
+        ),
+      ),
     );
   }
 }
