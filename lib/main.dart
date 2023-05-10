@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marvel_comics_app/features/home_page.dart';
+import 'package:marvel_comics_app/app/features/home_page.dart';
 
 void main() {
   runApp(const MyApp());
