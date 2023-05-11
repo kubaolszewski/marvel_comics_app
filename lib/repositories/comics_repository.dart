@@ -6,7 +6,7 @@ class ComicsRepository {
 
   final ComicsRemoteDataSource comicsRemoteDataSource;
 
-  Future<List<SingleComicsModel?>> getComics({required String title}) async {
+  Future<List<SingleComicsModel>> getComics({required String title}) async {
     return comicsRemoteDataSource.getComics(title: title);
   }
 }

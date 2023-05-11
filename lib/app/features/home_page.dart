@@ -55,7 +55,6 @@ class HomePage extends StatelessWidget {
 
 class _CustomBottomNavigationBar extends StatelessWidget {
   const _CustomBottomNavigationBar({
-    super.key,
     required this.pageIndex,
   });
 
