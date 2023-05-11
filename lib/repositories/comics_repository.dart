@@ -6,7 +6,13 @@ class ComicsRepository {
 
   final ComicsRemoteDataSource comicsRemoteDataSource;
 
-  Future<List<SingleComicsModel>> getComics({required String title}) async {
-    return comicsRemoteDataSource.getComics(title: title);
+  Future<List<SingleComicsModel>> getAllComics({required String title}) async {
+    final json = await comicsRemoteDataSource.getAllComics(
+      title: title,
+    );
+    if (json == null) {
+      return [];
+    }
+    return json.map((comics) => SingleComicsModel.fromJson(comics)).toList();
   }
 }

@@ -5,6 +5,7 @@ import 'package:marvel_comics_app/app/features/list_page/cubit/list_page_cubit.d
 import 'package:marvel_comics_app/core/enums.dart';
 import 'package:marvel_comics_app/data/remote_data_source.dart';
 import 'package:marvel_comics_app/models/single_comics_model.dart';
+// import 'package:marvel_comics_app/models/single_comics_model.dart';
 import 'package:marvel_comics_app/repositories/comics_repository.dart';
 
 class ListPage extends StatelessWidget {
@@ -19,7 +20,7 @@ class ListPage extends StatelessWidget {
         ComicsRepository(
           comicsRemoteDataSource: ComicsRemoteDataSource(),
         ),
-      ),
+      )..start(),
       child: BlocBuilder<ListPageCubit, ListPageState>(
         builder: (context, state) {
           switch (state.status) {
@@ -38,16 +39,20 @@ class ListPage extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             case Status.success:
-              return ListView(children: [
-                for (final comics in state.comicsModel)
-                  _ComicsList(comics: comics)
-              ]);
+              return ListView(
+                children: [
+                  for (final comics in state.comicsModel)
+                    _ComicsWidget(comics: comics),
+                ],
+              );
             case Status.error:
-              final errorMessage = state.errorMessage ?? 'Unknown error';
-              throw ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(errorMessage),
-                  backgroundColor: Colors.red,
+              return Center(
+                child: Text(
+                  'Something went wrong: ${state.errorMessage}',
+                  style: GoogleFonts.teko(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
                 ),
               );
           }
@@ -57,8 +62,8 @@ class ListPage extends StatelessWidget {
   }
 }
 
-class _ComicsList extends StatelessWidget {
-  const _ComicsList({
+class _ComicsWidget extends StatelessWidget {
+  const _ComicsWidget({
     required this.comics,
   });
 
@@ -82,7 +87,7 @@ class _ComicsList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '',
+                comics.title,
                 style: GoogleFonts.teko(
                   color: Colors.white,
                   fontSize: 32,
@@ -103,3 +108,8 @@ class _ComicsList extends StatelessWidget {
     );
   }
 }
+
+// ListView(children: [
+//                 for (final comics in state.comicsModel)
+//                   _ComicsList(comics: comics)
+//               ])

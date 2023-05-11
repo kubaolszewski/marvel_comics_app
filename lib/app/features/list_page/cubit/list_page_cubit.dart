@@ -11,14 +11,27 @@ class ListPageCubit extends Cubit<ListPageState> {
 
   ComicsRepository comicsRepository;
 
-  Future<void> getComics() async {
+  Future<void> start () async {
     emit(
       const ListPageState(
-        status: Status.initial,
+        status: Status.loading,
+      ),
+    );
+    emit(
+      const ListPageState(
+        status: Status.success,
+      ),
+    );
+  }
+
+  Future<void> getAllComics() async {
+    emit(
+      const ListPageState(
+        status: Status.loading,
       ),
     );
     try {
-      final comicsModel = await comicsRepository.getComics(title: '');
+      final comicsModel = await comicsRepository.getAllComics(title: '');
       emit(
         ListPageState(
           comicsModel: comicsModel,
