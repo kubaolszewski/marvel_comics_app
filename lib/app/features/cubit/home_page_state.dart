@@ -3,8 +3,8 @@ part of 'home_page_cubit.dart';
 @immutable
 class HomePageState {
   const HomePageState({
-    this.pageIndex = 0,
+    this.searchingController = false,
   });
 
-  final int pageIndex;
+  final bool searchingController;
 }

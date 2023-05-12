@@ -9,10 +9,10 @@ class HomePageCubit extends Cubit<HomePageState> {
 
   final ComicsRepository comicsRepository;
 
-Future<void> changeIndex(int newPageIndex) async {
+  Future<void> searchingIndicator({required bool searchingController}) async {
     emit(
       HomePageState(
-        pageIndex: newPageIndex,
+        searchingController: searchingController,
       ),
     );
   }

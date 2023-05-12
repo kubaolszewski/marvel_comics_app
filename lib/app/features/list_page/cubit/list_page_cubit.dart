@@ -11,30 +11,17 @@ class ListPageCubit extends Cubit<ListPageState> {
 
   ComicsRepository comicsRepository;
 
-  Future<void> start () async {
-    emit(
-      const ListPageState(
-        status: Status.loading,
-      ),
-    );
-    emit(
-      const ListPageState(
-        status: Status.success,
-      ),
-    );
-  }
-
-  Future<void> getAllComics() async {
+  Future<void> start() async {
     emit(
       const ListPageState(
         status: Status.loading,
       ),
     );
     try {
-      final comicsModel = await comicsRepository.getAllComics(title: '');
+      // final comicsModel = await comicsRepository.getAllComics();
       emit(
-        ListPageState(
-          comicsModel: comicsModel,
+        const ListPageState(
+          // comicsModel: comicsModel,
           status: Status.success,
         ),
       );
@@ -47,4 +34,28 @@ class ListPageCubit extends Cubit<ListPageState> {
       );
     }
   }
+
+  // Future<void> getComicsByTitle({required String title}) async {
+  //   emit(
+  //     const ListPageState(
+  //       status: Status.loading,
+  //     ),
+  //   );
+  //   try {
+  //     final searchedComics = await comicsRepository.getComicsByTitle(title:title);
+  //     emit(
+  //       ListPageState(
+  //         searchedComics: searchedComics,
+  //         status: Status.success,
+  //       ),
+  //     );
+  //   } catch (error) {
+  //     emit(
+  //       ListPageState(
+  //         status: Status.error,
+  //         errorMessage: error.toString(),
+  //       ),
+  //     );
+  //   }
+  // }
 }

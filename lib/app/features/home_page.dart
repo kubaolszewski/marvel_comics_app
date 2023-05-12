@@ -15,37 +15,63 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => HomePageCubit(
-          ComicsRepository(comicsRemoteDataSource: ComicsRemoteDataSource())),
+        ComicsRepository(
+          comicsRemoteDataSource: ComicsRemoteDataSource(),
+        ),
+      ),
       child: BlocBuilder<HomePageCubit, HomePageState>(
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(
-              actions: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.search,
-                    color: Colors.red,
+            appBar: state.searchingController
+                ? AppBar(
+                    actions: [
+                      IconButton(
+                        icon: const Icon(
+                          Icons.search,
+                          color: Colors.red,
+                        ),
+                        onPressed: () {
+                          context
+                              .read<HomePageCubit>()
+                              .searchingIndicator(searchingController: false);
+                        },
+                      ),
+                    ],
+                    leading: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.red,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    title: Text(
+                      'Marvel Comics',
+                      style: GoogleFonts.poppins(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+                : AppBar(
+                    leading: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.red,
+                      ),
+                      onPressed: () {
+                        context
+                            .read<HomePageCubit>()
+                            .searchingIndicator(searchingController: true);
+                      },
+                    ),
                   ),
-                  onPressed: () {},
-                ),
-              ],
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.red,
-                ),
-                onPressed: () {},
-              ),
-              title: Text(
-                'Marvel Comics',
-                style: GoogleFonts.poppins(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            body: const ListPage(),
-            
+            body: state.searchingController
+                ? const ListPage()
+                : const Center(
+                    child: Text('Działa'),
+                  ),
           );
         },
       ),
