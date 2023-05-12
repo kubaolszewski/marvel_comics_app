@@ -20,7 +20,7 @@ class ListPageCubit extends Cubit<ListPageState> {
     try {
       // final comicsModel = await comicsRepository.getAllComics();
       emit(
-        const ListPageState(
+         const ListPageState(
           // comicsModel: comicsModel,
           status: Status.success,
         ),

@@ -40,7 +40,7 @@ class ListPage extends StatelessWidget {
               );
             case Status.success:
               return const Center(
-                child: Text('Działa v.2'),
+                child: Text('List Page'),
               );
             // ListView(
             //   children: [

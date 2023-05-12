@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marvel_comics_app/app/features/cubit/home_page_cubit.dart';
 import 'package:marvel_comics_app/app/features/list_page/list_page_content.dart';
+import 'package:marvel_comics_app/app/features/search_page/search_page_content.dart';
 import 'package:marvel_comics_app/data/remote_data_source.dart';
 import 'package:marvel_comics_app/repositories/comics_repository.dart';
 
@@ -11,8 +12,10 @@ class HomePage extends StatelessWidget {
     super.key,
   });
 
+
   @override
   Widget build(BuildContext context) {
+  final searchController = TextEditingController();
     return BlocProvider(
       create: (context) => HomePageCubit(
         ComicsRepository(
@@ -42,9 +45,7 @@ class HomePage extends StatelessWidget {
                         Icons.arrow_back,
                         color: Colors.red,
                       ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
+                      onPressed: () {},
                     ),
                     title: Text(
                       'Marvel Comics',
@@ -55,6 +56,23 @@ class HomePage extends StatelessWidget {
                     ),
                   )
                 : AppBar(
+                    actions: [
+                      IconButton(
+                        onPressed: () {
+                          searchController.clear();
+                        },
+                        icon: const Icon(
+                          Icons.clear,
+                        ),
+                      )
+                    ],
+                    title: TextField(
+                      controller: searchController,
+                      decoration: const InputDecoration(
+                        hintText: 'Search',
+                        border: InputBorder.none,
+                      ),
+                    ),
                     leading: IconButton(
                       icon: const Icon(
                         Icons.arrow_back,
@@ -69,9 +87,7 @@ class HomePage extends StatelessWidget {
                   ),
             body: state.searchingController
                 ? const ListPage()
-                : const Center(
-                    child: Text('Działa'),
-                  ),
+                : const SearchPage(),
           );
         },
       ),
