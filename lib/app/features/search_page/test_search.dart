@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Search extends SearchDelegate {
+class Search extends SearchDelegate<String> {
   @override
-  List<Widget>? buildActions(BuildContext context) {
-    return <Widget>[
+  List<Widget> buildActions(BuildContext context) {
+    return [
       IconButton(
         onPressed: () {
           query = '';
@@ -25,11 +25,11 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return const Center(child: Text('data'));
+    return const Center(child: Text('results'));
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return const Center(child: Text(''));
+    return const Center(child: Text('susggestions'));
   }
 }

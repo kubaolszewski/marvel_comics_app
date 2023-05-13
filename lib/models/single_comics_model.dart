@@ -1,16 +1,16 @@
 class SingleComicsModel {
   SingleComicsModel({
     required this.title,
-    required this.description,
-    required this.imagePath,
+     this.description,
+    required this.thumbnail,
   });
 
   final String title;
-  final String description;
-  final String imagePath;
+  final dynamic description;
+  final String thumbnail;
 
   SingleComicsModel.fromJson(Map<String, dynamic> json)
-      : title = json['data']['results']['title'] as String,
-        description = json['data']['results']['description'] as String,
-        imagePath = json['data']['results']['thumbnail']['path'] as String;
+      : title = json['title'] as String,
+        description = json['description'] as String,
+        thumbnail = json['path'] as String;
 }
