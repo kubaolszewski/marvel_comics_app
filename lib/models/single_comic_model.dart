@@ -31,10 +31,6 @@ class ComicThumbnail {
   final String path;
   final String extension;
 
-  String get imagePath {
-    return '$path.$extension';
-  }
-
   factory ComicThumbnail.fromJson(Map<String, dynamic> json) =>
       _$ComicThumbnailFromJson(json);
 

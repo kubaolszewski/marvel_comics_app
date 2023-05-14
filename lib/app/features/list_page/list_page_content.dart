@@ -74,7 +74,7 @@ class _ComicWidget extends StatelessWidget {
                   height: 160,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(comic.image.imagePath),
+                      image: NetworkImage('${comic.image.path}.${comic.image.extension}'),
                       fit: BoxFit.cover,
                     ),
                   ),
