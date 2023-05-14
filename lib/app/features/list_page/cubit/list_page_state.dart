@@ -1,14 +1,10 @@
 part of 'list_page_cubit.dart';
 
-@immutable
-class ListPageState {
-  const ListPageState({
-    this.comics = const [],
-    this.comicStatus = Status.initial,
-    this.errorMessage = '',
-  });
-
-  final List<SingleComicModel> comics;
-  final Status comicStatus;
-  final String errorMessage;
+@freezed
+class ListPageState with _$ListPageState {
+  const factory ListPageState({
+    @Default([]) List<SingleComicModel> comics,
+    @Default(Status.initial) Status comicStatus,
+    @Default('') String errorMessage,
+  }) = _ListPageState;
 }

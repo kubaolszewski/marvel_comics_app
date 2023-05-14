@@ -7,7 +7,6 @@ part 'single_comic_model.freezed.dart';
 class SingleComicModel with _$SingleComicModel {
   factory SingleComicModel(
     final String title,
-    // ignore: invalid_annotation_target
     @JsonKey(name: 'thumbnail') final ComicThumbnail image,
     final String? description,
   ) = _SingleComicModel;
