@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marvel_comics_app/app/features/cubit/home_page_cubit.dart';
+import 'package:marvel_comics_app/app/features/list_page/cubit/list_page_cubit.dart';
 import 'package:marvel_comics_app/app/features/list_page/list_page_content.dart';
 import 'package:marvel_comics_app/app/features/search_page/cubit/search_page_cubit.dart';
 import 'package:marvel_comics_app/app/features/search_page/search_page_content.dart';
@@ -91,7 +92,11 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
             body: state.searchingController
-                ? const ListPage()
+                ? BlocProvider(
+                    create: (context) => ListPageCubit(
+                    )..fetchComics(),
+                    child:  const ListPage(),
+                  )
                 : const SearchPage(),
           );
         },

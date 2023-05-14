@@ -1,112 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:marvel_comics_app/app/features/list_page/cubit/list_page_cubit.dart';
-import 'package:marvel_comics_app/core/enums.dart';
-import 'package:marvel_comics_app/data/remote_data_source.dart';
-import 'package:marvel_comics_app/models/single_comics_model.dart';
-import 'package:marvel_comics_app/repositories/comics_repository.dart';
 
 class ListPage extends StatelessWidget {
-  const ListPage({
-    super.key,
-  });
+  const ListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ListPageCubit(
-        ComicsRepository(
-          comicsRemoteDataSource: ComicsRemoteDataSource(),
-        ),
-      )..start(),
-      child: BlocBuilder<ListPageCubit, ListPageState>(
+    return Scaffold(
+      body: BlocBuilder<ListPageCubit, ListPageState>(
         builder: (context, state) {
-          switch (state.status) {
-            case Status.initial:
-              return Center(
-                child: Text(
-                  'Initial state.',
-                  style: GoogleFonts.teko(
-                    color: Colors.white,
-                    fontSize: 24,
-                  ),
-                ),
-              );
-            case Status.loading:
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            case Status.success:
-              return ListView(
-                children: [
-                  for (final comics in state.comicsModel)
-                    _ComicsWidget(comics: comics),
-                ],
-              );
-            case Status.error:
-              return Center(
-                child: Text(
-                  'Something went wrong: ${state.errorMessage}',
-                  style: GoogleFonts.teko(
-                    color: Colors.white,
-                    fontSize: 24,
-                  ),
-                ),
-              );
+          if (state is ComicLoadingState) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is ComicLoadedState) {
+            final comics = state.comics;
+            return ListView.builder(
+              itemCount: comics.length,
+              itemBuilder: (context, index) {
+                final comic = comics[index];
+                return ListTile(
+                  title: Text(comic.title),
+                  subtitle: comic.description != null ? Text(comic.description!) : null,
+                  leading: Image.network(comic.image),
+                );
+              },
+            );
+          } else if (state is ComicErrorState) {
+            return Center(
+              child: Text(state.errorMessage),
+            );
           }
+
+          return Container();
         },
       ),
-    );
-  }
-}
-
-class _ComicsWidget extends StatelessWidget {
-  const _ComicsWidget({
-    required this.comics,
-  });
-
-  final SingleComicsModel comics;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 10,
-      ),
-      child: InkWell(
-        onTap: () {},
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: const Color(0xff85c8c9),
-          ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    comics.title,
-                    style: GoogleFonts.teko(
-                      color: Colors.white,
-                      fontSize: 32,
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(right: 8.0),
-                    child: Icon(
-                      Icons.arrow_right,
-                      color: Colors.white,
-                      size: 32,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          final comicCubit = context.read<ListPageCubit>();
+          comicCubit.fetchComics();
+        },
+        child: const Icon(Icons.refresh),
       ),
     );
   }

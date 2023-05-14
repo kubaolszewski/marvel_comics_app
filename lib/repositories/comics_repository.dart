@@ -6,14 +6,23 @@ class ComicsRepository {
 
   final ComicsRemoteDataSource comicsRemoteDataSource;
 
-  Future<List<SingleComicsModel>> getAllComics() async {
-    final json = await comicsRemoteDataSource.getAllComics(
-    );
-    if (json == null) {
-      return [];
+  Future<List<SingleComicsModel>> fetchComics() async {
+    try {
+      return await comicsRemoteDataSource.fetchComics();
+    } catch (error) {
+      rethrow;
     }
-    return json.map((comics) => SingleComicsModel.fromJson(comics)).toList();
   }
+
+  // poprzedni call
+  // Future<List<SingleComicsModel>> getAllComics() async {
+  //   final json = await comicsRemoteDataSource.getAllComics(
+  //   );
+  //   if (json == null) {
+  //     return [];
+  //   }
+  //   return json.map((comics) => SingleComicsModel.fromJson(comics)).toList();
+  // }
 
   // Future<List<SingleComicsModel>> getComicsByTitle({required String title}) async {
   //   final json = await comicsRemoteDataSource.getComicsByTitle(

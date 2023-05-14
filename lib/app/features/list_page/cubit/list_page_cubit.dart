@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marvel_comics_app/core/enums.dart';
+import 'package:marvel_comics_app/data/remote_data_source.dart';
 import 'package:marvel_comics_app/models/single_comics_model.dart';
 import 'package:marvel_comics_app/repositories/comics_repository.dart';
 import 'package:meta/meta.dart';
@@ -7,55 +7,19 @@ import 'package:meta/meta.dart';
 part 'list_page_state.dart';
 
 class ListPageCubit extends Cubit<ListPageState> {
-  ListPageCubit(this.comicsRepository) : super(const ListPageState());
+  final ComicsRepository comicsRepository =
+      ComicsRepository(comicsRemoteDataSource: ComicsRemoteDataSource());
 
-  ComicsRepository comicsRepository;
+  ListPageCubit() : super(ComicLoadingState());
 
-  Future<void> start() async {
-    emit(
-      const ListPageState(
-        status: Status.loading,
-      ),
-    );
+  Future<void> fetchComics() async {
+    emit(ComicLoadingState());
+
     try {
-      final comicsModel = await comicsRepository.getAllComics();
-      emit(
-          ListPageState(
-          comicsModel: comicsModel,
-          status: Status.success,
-        ),
-      );
+      final comics = await comicsRepository.fetchComics();
+      emit(ComicLoadedState(comics));
     } catch (error) {
-      emit(
-        ListPageState(
-          status: Status.error,
-          errorMessage: error.toString(),
-        ),
-      );
+      emit(ComicErrorState('Failed to fetch comics.'));
     }
   }
-
-  // Future<void> getComicsByTitle({required String title}) async {
-  //   emit(
-  //     const ListPageState(
-  //       status: Status.loading,
-  //     ),
-  //   );
-  //   try {
-  //     final searchedComics = await comicsRepository.getComicsByTitle(title:title);
-  //     emit(
-  //       ListPageState(
-  //         searchedComics: searchedComics,
-  //         status: Status.success,
-  //       ),
-  //     );
-  //   } catch (error) {
-  //     emit(
-  //       ListPageState(
-  //         status: Status.error,
-  //         errorMessage: error.toString(),
-  //       ),
-  //     );
-  //   }
-  // }
 }
