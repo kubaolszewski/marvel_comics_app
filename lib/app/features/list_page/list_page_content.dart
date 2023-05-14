@@ -33,8 +33,12 @@ class ListPage extends StatelessWidget {
             );
           }
 
-          return const Placeholder(
-            child: Text('Empty space :('),
+          return const Center(
+            child: Placeholder(
+              fallbackHeight: 200,
+              fallbackWidth: 200,
+              child: Text('Empty space :('),
+            ),
           );
         },
       ),

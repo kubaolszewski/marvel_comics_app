@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marvel_comics_app/app/features/comic_details/comic_details_page.dart';
 import 'package:marvel_comics_app/app/features/search_page/cubit/search_page_cubit.dart';
-import 'package:marvel_comics_app/core/enums.dart';
 import 'package:marvel_comics_app/models/single_comic_model.dart';
 
 class ComicSearchPage extends SearchDelegate<String> {
@@ -40,24 +39,18 @@ class ComicSearchPage extends SearchDelegate<String> {
     return BlocBuilder<SearchPageCubit, SearchPageState>(
       bloc: searchPageCubit,
       builder: (context, state) {
-        if (state.comicStatus == Status.loading) {
+        if (state is SearchPageLoadingState) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
 
-        if (state.comicStatus == Status.success) {
-          final List<SingleComicModel> comics = state.searchedComics;
+        if (state is SearchPageLoadedState) {
+          final List<SingleComicModel> comics = state.comics;
 
           if (comics.isEmpty) {
-            return Center(
-              child: Text(
-                'No results were found.',
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
-              ),
+            return const Center(
+              child: Text('No results were found.'),
             );
           }
 
@@ -70,15 +63,9 @@ class ComicSearchPage extends SearchDelegate<String> {
           );
         }
 
-        if (state.comicStatus == Status.error) {
+        if (state is SearchPageErrorState) {
           return Center(
-            child: Text(
-              state.errorMessage,
-              style: GoogleFonts.poppins(
-                fontSize: 16,
-                color: Colors.white,
-              ),
-            ),
+            child: Text(state.errorMessage),
           );
         }
 
@@ -92,6 +79,7 @@ class ComicSearchPage extends SearchDelegate<String> {
     return Container();
   }
 }
+
 
 class _ComicWidget extends StatelessWidget {
   const _ComicWidget({
