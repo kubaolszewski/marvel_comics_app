@@ -1,14 +1,18 @@
 part of 'search_page_cubit.dart';
 
 @immutable
-class SearchPageState {
-  const SearchPageState({
-    this.searchedComics = const [],
-    this.status = Status.initial,
-    this.errorMessage,
-  });
+class SearchPageState {}
 
-  final List<SingleComicsModel> searchedComics;
-  final Status status;
-  final String? errorMessage;
+class ComicLoadingState extends SearchPageState {}
+
+class ComicLoadedState extends SearchPageState {
+  final List<SingleComicsModel> comics;
+
+  ComicLoadedState(this.comics);
+}
+
+class ComicErrorState extends SearchPageState {
+  final String errorMessage;
+
+  ComicErrorState(this.errorMessage);
 }

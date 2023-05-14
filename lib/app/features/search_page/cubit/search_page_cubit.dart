@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marvel_comics_app/core/enums.dart';
-// import 'package:marvel_comics_app/data/remote_data_source.dart';
+import 'package:marvel_comics_app/data/remote_data_source.dart';
 import 'package:marvel_comics_app/models/single_comics_model.dart';
 import 'package:marvel_comics_app/repositories/comics_repository.dart';
 import 'package:meta/meta.dart';
@@ -8,32 +7,19 @@ import 'package:meta/meta.dart';
 part 'search_page_state.dart';
 
 class SearchPageCubit extends Cubit<SearchPageState> {
-  SearchPageCubit(this.comicsRepository) : super(const SearchPageState());
+  final ComicsRepository comicsRepository =
+      ComicsRepository(comicsRemoteDataSource: ComicsRemoteDataSource());
 
-  ComicsRepository comicsRepository;
+  SearchPageCubit() : super(SearchPageState());
 
-  Future<void> getComicsByTitle({required String title}) async {
-    emit(
-      const SearchPageState(
-        status: Status.loading,
-      ),
-    );
+  Future<void> searchComicByTitle({required String title}) async {
+    emit(ComicLoadingState());
     try {
-      // final searchedComics =
-      // await comicsRepository.getComicsByTitle(title: title);
-      emit(
-        const SearchPageState(
-          // searchedComics: searchedComics,
-          status: Status.success,
-        ),
-      );
+      final searchedComics =
+          await comicsRepository.searchComicByTitle(title: title);
+      emit(ComicLoadedState(searchedComics));
     } catch (error) {
-      emit(
-        SearchPageState(
-          status: Status.error,
-          errorMessage: error.toString(),
-        ),
-      );
+      emit(ComicErrorState('No results were found.'));
     }
   }
 }

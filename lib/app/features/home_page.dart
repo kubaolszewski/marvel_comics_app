@@ -16,7 +16,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchController = TextEditingController();
     return BlocProvider(
       create: (context) => HomePageCubit(
         ComicsRepository(
@@ -26,81 +25,41 @@ class HomePage extends StatelessWidget {
       child: BlocBuilder<HomePageCubit, HomePageState>(
         builder: (context, state) {
           return Scaffold(
-            appBar: state.searchingController
-                ? AppBar(
-                  elevation: 16.0,
-                    actions: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.search,
-                          color: Colors.red,
-                        ),
-                        onPressed: () {
-                          context
-                              .read<HomePageCubit>()
-                              .searchingIndicator(searchingController: false);
-                        },
-                      ),
-                    ],
-                    leading: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: Colors.red,
-                      ),
-                      onPressed: () {},
+              appBar: AppBar(
+                elevation: 8.0,
+                actions: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.search,
+                      color: Colors.red,
                     ),
-                    title: Text(
-                      'Marvel Comics',
-                      style: GoogleFonts.poppins(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
-                : AppBar(
-                  elevation: 16.0,
-                    actions: [
-                      IconButton(
-                        onPressed: () {
-                          searchController.clear();
-                        },
-                        icon: const Icon(
-                          Icons.clear,
-                        ),
-                      )
-                    ],
-                    title: TextField(
-                      controller: searchController,
-                      decoration: const InputDecoration(
-                        hintText: 'Search',
-                        border: InputBorder.none,
-                      ),
-                      onChanged: (title) {
-                        context
-                            .read<SearchPageCubit>()
-                            .getComicsByTitle(title: title);
-                      },
-                    ),
-                    leading: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: Colors.red,
-                      ),
-                      onPressed: () {
-                        context
-                            .read<HomePageCubit>()
-                            .searchingIndicator(searchingController: true);
-                      },
-                    ),
+                    onPressed: () async {
+                      await showSearch(
+                          context: context,
+                          delegate: ComicSearchPage(
+                              searchPageCubit: SearchPageCubit()));
+                    },
                   ),
-            body: state.searchingController
-                ? BlocProvider(
-                    create: (context) => ListPageCubit(
-                    )..fetchComics(),
-                    child:  const ListPage(),
-                  )
-                : const SearchPage(),
-          );
+                ],
+                leading: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.red,
+                  ),
+                  onPressed: () {},
+                ),
+                title: Text(
+                  'Marvel Comics',
+                  style: GoogleFonts.poppins(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              body: BlocProvider(
+                create: (context) => ListPageCubit()..fetchComics(),
+                child: const ListPage(),
+              ));
         },
       ),
     );

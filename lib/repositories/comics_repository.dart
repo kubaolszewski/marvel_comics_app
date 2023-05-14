@@ -13,4 +13,14 @@ class ComicsRepository {
       rethrow;
     }
   }
+
+
+  Future<List<SingleComicsModel>> searchComicByTitle({required String title}) async {
+    try {
+      return await comicsRemoteDataSource.searchComicByTitle(title:title);
+    } catch (error) {
+      rethrow;
+    }
+  }
+  
 }

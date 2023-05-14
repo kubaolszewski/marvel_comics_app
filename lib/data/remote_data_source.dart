@@ -18,4 +18,23 @@ class ComicsRemoteDataSource {
       throw Exception('Failed to connect to the API');
     }
   }
+
+  Future<List<SingleComicsModel>> searchComicByTitle(
+      {required String title}) async {
+    try {
+      final response = await Dio().get(
+          'https://gateway.marvel.com/v1/public/comics?ts=1&apikey=080a502746c8a60aeab043387a56eef0&hash=6edc18ab1a954d230c1f03c590d469d2&titleStartsWith=$title');
+      if (response.statusCode == 200) {
+        final responseData = response.data['data']['results'];
+        return responseData
+            .map<SingleComicsModel>((json) => SingleComicsModel.fromJson(json))
+            .toList();
+      }
+      {
+        throw Exception('Failed to fetch comics: ${response.statusCode}');
+      }
+    } catch (error) {
+      throw Exception('Failed to connect to the API');
+    }
+  }
 }
