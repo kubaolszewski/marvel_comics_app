@@ -33,11 +33,13 @@ class ListPage extends StatelessWidget {
             );
           }
 
-          return const Center(
-            child: Placeholder(
-              fallbackHeight: 200,
-              fallbackWidth: 200,
-              child: Text('Empty space :('),
+          return Center(
+            child: Text(
+              'Empty space :(',
+              style: GoogleFonts.poppins(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           );
         },
@@ -72,7 +74,7 @@ class _ComicWidget extends StatelessWidget {
                   height: 160,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(comic.image),
+                      image: NetworkImage(comic.image.imagePath),
                       fit: BoxFit.cover,
                     ),
                   ),

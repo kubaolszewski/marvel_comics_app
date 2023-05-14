@@ -31,7 +31,7 @@ class ComicDetails extends StatelessWidget {
       body: Stack(
         children: [
           Image.network(
-            comicDetails.image,
+            comicDetails.image.imagePath,
             fit: BoxFit.cover,
             height: double.infinity,
             width: double.infinity,
