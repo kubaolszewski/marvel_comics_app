@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marvel_comics_app/app/features/search_page/cubit/search_page_cubit.dart';
+import 'package:marvel_comics_app/core/enums.dart';
 import 'package:marvel_comics_app/models/single_comics_model.dart';
 
 class ComicSearchPage extends SearchDelegate<String> {
@@ -38,14 +39,14 @@ class ComicSearchPage extends SearchDelegate<String> {
     return BlocBuilder<SearchPageCubit, SearchPageState>(
       bloc: searchPageCubit,
       builder: (context, state) {
-        if (state is ComicLoadingState) {
+        if (state.comicStatus == Status.loading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
 
-        if (state is ComicLoadedState) {
-          final List<SingleComicsModel> comics = state.comics;
+        if (state.comicStatus == Status.success) {
+          final List<SingleComicsModel> comics = state.searchedComics;
 
           if (comics.isEmpty) {
             return const Center(
@@ -62,9 +63,9 @@ class ComicSearchPage extends SearchDelegate<String> {
           );
         }
 
-        if (state is ComicErrorState) {
+        if (state.comicStatus == Status.error) {
           return Center(
-            child: Text(state.errorMessage),
+            child: Text(state.errorMessage!),
           );
         }
 
