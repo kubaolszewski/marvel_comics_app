@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marvel_comics_app/app/features/list_page/cubit/list_page_cubit.dart';
+import 'package:marvel_comics_app/core/enums.dart';
 import 'package:marvel_comics_app/models/single_comics_model.dart';
 
 class ListPage extends StatelessWidget {
@@ -12,11 +13,11 @@ class ListPage extends StatelessWidget {
     return Scaffold(
       body: BlocBuilder<ListPageCubit, ListPageState>(
         builder: (context, state) {
-          if (state is ComicLoadingState) {
+          if (state.comicStatus == Status.loading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state is ComicLoadedState) {
+          } else if (state.comicStatus == Status.success) {
             final comics = state.comics;
             return ListView.builder(
               itemCount: comics.length,
@@ -25,9 +26,9 @@ class ListPage extends StatelessWidget {
                 return _ComicWidget(comic: comic);
               },
             );
-          } else if (state is ComicErrorState) {
+          } else if (state.comicStatus == Status.error) {
             return Center(
-              child: Text(state.errorMessage),
+              child: Text(state.errorMessage!),
             );
           }
 
