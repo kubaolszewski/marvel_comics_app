@@ -6,27 +6,27 @@ part of 'single_comic_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SingleComicModel _$SingleComicModelFromJson(Map<String, dynamic> json) =>
-    SingleComicModel(
-      title: json['title'] as String,
-      image: ComicThumbnail.fromJson(json['thumbnail'] as Map<String, dynamic>),
-      description: json['description'] as String?,
+_$_SingleComicModel _$$_SingleComicModelFromJson(Map<String, dynamic> json) =>
+    _$_SingleComicModel(
+      json['title'] as String,
+      ComicThumbnail.fromJson(json['thumbnail'] as Map<String, dynamic>),
+      json['description'] as String?,
     );
 
-Map<String, dynamic> _$SingleComicModelToJson(SingleComicModel instance) =>
+Map<String, dynamic> _$$_SingleComicModelToJson(_$_SingleComicModel instance) =>
     <String, dynamic>{
       'title': instance.title,
       'thumbnail': instance.image,
       'description': instance.description,
     };
 
-ComicThumbnail _$ComicThumbnailFromJson(Map<String, dynamic> json) =>
-    ComicThumbnail(
-      path: json['path'] as String,
-      extension: json['extension'] as String,
+_$_ComicThumbnail _$$_ComicThumbnailFromJson(Map<String, dynamic> json) =>
+    _$_ComicThumbnail(
+      json['path'] as String,
+      json['extension'] as String,
     );
 
-Map<String, dynamic> _$ComicThumbnailToJson(ComicThumbnail instance) =>
+Map<String, dynamic> _$$_ComicThumbnailToJson(_$_ComicThumbnail instance) =>
     <String, dynamic>{
       'path': instance.path,
       'extension': instance.extension,
