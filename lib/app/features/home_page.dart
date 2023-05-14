@@ -24,9 +24,11 @@ class HomePage extends StatelessWidget {
             ),
             onPressed: () async {
               await showSearch(
-                  context: context,
-                  delegate:
-                      ComicSearchPage(searchPageCubit: SearchPageCubit()));
+                context: context,
+                delegate: ComicSearchPage(
+                  searchPageCubit: SearchPageCubit(),
+                ),
+              );
             },
           ),
         ],
