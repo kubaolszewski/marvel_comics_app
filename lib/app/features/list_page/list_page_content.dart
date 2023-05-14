@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:marvel_comics_app/app/features/list_page/cubit/list_page_cubit.dart';
+import 'package:marvel_comics_app/models/single_comics_model.dart';
 
 class ListPage extends StatelessWidget {
   const ListPage({super.key});
@@ -20,11 +22,7 @@ class ListPage extends StatelessWidget {
               itemCount: comics.length,
               itemBuilder: (context, index) {
                 final comic = comics[index];
-                return ListTile(
-                  title: Text(comic.title),
-                  subtitle: comic.description != null ? Text(comic.description!) : null,
-                  leading: Image.network(comic.image),
-                );
+                return _ComicWidget(comic: comic);
               },
             );
           } else if (state is ComicErrorState) {
@@ -33,16 +31,55 @@ class ListPage extends StatelessWidget {
             );
           }
 
-          return Container();
+          return const Placeholder(child: Text('Empty space :('));
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          final comicCubit = context.read<ListPageCubit>();
-          comicCubit.fetchComics();
-        },
-        child: const Icon(Icons.refresh),
       ),
     );
+  }
+}
+
+class _ComicWidget extends StatelessWidget {
+  const _ComicWidget({
+    required this.comic,
+  });
+
+  final SingleComicsModel comic;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+        onTap: () {},
+        child: Card(
+      elevation: 2,
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            Container(
+              width: 120,
+              height: 160,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(comic.image),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Text(
+                comic.title,
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const Icon(Icons.arrow_forward),
+          ],
+        ),
+      ),
+    ));
   }
 }

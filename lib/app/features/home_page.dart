@@ -28,6 +28,7 @@ class HomePage extends StatelessWidget {
           return Scaffold(
             appBar: state.searchingController
                 ? AppBar(
+                  elevation: 16.0,
                     actions: [
                       IconButton(
                         icon: const Icon(
@@ -57,6 +58,7 @@ class HomePage extends StatelessWidget {
                     ),
                   )
                 : AppBar(
+                  elevation: 16.0,
                     actions: [
                       IconButton(
                         onPressed: () {
