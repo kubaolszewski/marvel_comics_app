@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_comics_app/core/enums.dart';
 import 'package:marvel_comics_app/data/remote_data_source.dart';
-import 'package:marvel_comics_app/models/single_comics_model.dart';
+import 'package:marvel_comics_app/models/single_comic_model.dart';
 import 'package:marvel_comics_app/repositories/comics_repository.dart';
 import 'package:meta/meta.dart';
 

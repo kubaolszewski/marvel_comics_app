@@ -5,15 +5,10 @@ class SearchPageState {
   const SearchPageState ({
     this.searchedComics = const [],
     this.comicStatus = Status.initial,
-    this.errorMessage,
+    this.errorMessage = '',
   });
 
-  final List<SingleComicsModel> searchedComics;
+  final List<SingleComicModel> searchedComics;
   final Status comicStatus;
-  final String? errorMessage;
+  final String errorMessage;
 }
-
-
-// comicloading = status.loading
-// comicloaded = status.success
-// comicerror = status.error

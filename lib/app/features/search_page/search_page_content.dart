@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:marvel_comics_app/app/features/comic_details/comic_details_page.dart';
 import 'package:marvel_comics_app/app/features/search_page/cubit/search_page_cubit.dart';
 import 'package:marvel_comics_app/core/enums.dart';
-import 'package:marvel_comics_app/models/single_comics_model.dart';
+import 'package:marvel_comics_app/models/single_comic_model.dart';
 
 class ComicSearchPage extends SearchDelegate<String> {
   final SearchPageCubit searchPageCubit;
@@ -46,11 +47,17 @@ class ComicSearchPage extends SearchDelegate<String> {
         }
 
         if (state.comicStatus == Status.success) {
-          final List<SingleComicsModel> comics = state.searchedComics;
+          final List<SingleComicModel> comics = state.searchedComics;
 
           if (comics.isEmpty) {
-            return const Center(
-              child: Text('No results were found.'),
+            return Center(
+              child: Text(
+                'No results were found.',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
+              ),
             );
           }
 
@@ -65,7 +72,13 @@ class ComicSearchPage extends SearchDelegate<String> {
 
         if (state.comicStatus == Status.error) {
           return Center(
-            child: Text(state.errorMessage!),
+            child: Text(
+              state.errorMessage,
+              style: GoogleFonts.poppins(
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
           );
         }
 
@@ -85,12 +98,15 @@ class _ComicWidget extends StatelessWidget {
     required this.comic,
   });
 
-  final SingleComicsModel comic;
+  final SingleComicModel comic;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (_) => ComicDetails(comicDetails: comic)));
+      },
       child: Card(
         elevation: 2,
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),

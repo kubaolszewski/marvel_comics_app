@@ -5,10 +5,10 @@ class ListPageState {
   const ListPageState({
     this.comics = const [],
     this.comicStatus = Status.initial,
-    this.errorMessage,
+    this.errorMessage = '',
   });
 
-  final List<SingleComicsModel> comics;
+  final List<SingleComicModel> comics;
   final Status comicStatus;
-  final String? errorMessage;
+  final String errorMessage;
 }
