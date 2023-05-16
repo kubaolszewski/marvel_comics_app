@@ -23,6 +23,7 @@ mixin _$SingleComicModel {
   String get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'thumbnail')
   ComicThumbnail get image => throw _privateConstructorUsedError;
+  @JsonKey(name: 'description')
   String? get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +41,7 @@ abstract class $SingleComicModelCopyWith<$Res> {
   $Res call(
       {String title,
       @JsonKey(name: 'thumbnail') ComicThumbnail image,
-      String? description});
+      @JsonKey(name: 'description') String? description});
 
   $ComicThumbnailCopyWith<$Res> get image;
 }
@@ -98,7 +99,7 @@ abstract class _$$_SingleComicModelCopyWith<$Res>
   $Res call(
       {String title,
       @JsonKey(name: 'thumbnail') ComicThumbnail image,
-      String? description});
+      @JsonKey(name: 'description') String? description});
 
   @override
   $ComicThumbnailCopyWith<$Res> get image;
@@ -138,9 +139,10 @@ class __$$_SingleComicModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SingleComicModel implements _SingleComicModel {
-  _$_SingleComicModel(
-      this.title, @JsonKey(name: 'thumbnail') this.image, this.description);
+class _$_SingleComicModel extends _SingleComicModel {
+  _$_SingleComicModel(this.title, @JsonKey(name: 'thumbnail') this.image,
+      @JsonKey(name: 'description') this.description)
+      : super._();
 
   factory _$_SingleComicModel.fromJson(Map<String, dynamic> json) =>
       _$$_SingleComicModelFromJson(json);
@@ -151,6 +153,7 @@ class _$_SingleComicModel implements _SingleComicModel {
   @JsonKey(name: 'thumbnail')
   final ComicThumbnail image;
   @override
+  @JsonKey(name: 'description')
   final String? description;
 
   @override
@@ -187,11 +190,13 @@ class _$_SingleComicModel implements _SingleComicModel {
   }
 }
 
-abstract class _SingleComicModel implements SingleComicModel {
+abstract class _SingleComicModel extends SingleComicModel {
   factory _SingleComicModel(
-      final String title,
-      @JsonKey(name: 'thumbnail') final ComicThumbnail image,
-      final String? description) = _$_SingleComicModel;
+          final String title,
+          @JsonKey(name: 'thumbnail') final ComicThumbnail image,
+          @JsonKey(name: 'description') final String? description) =
+      _$_SingleComicModel;
+  _SingleComicModel._() : super._();
 
   factory _SingleComicModel.fromJson(Map<String, dynamic> json) =
       _$_SingleComicModel.fromJson;
@@ -202,6 +207,7 @@ abstract class _SingleComicModel implements SingleComicModel {
   @JsonKey(name: 'thumbnail')
   ComicThumbnail get image;
   @override
+  @JsonKey(name: 'description')
   String? get description;
   @override
   @JsonKey(ignore: true)
