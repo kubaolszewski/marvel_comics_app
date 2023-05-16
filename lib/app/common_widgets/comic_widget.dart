@@ -16,7 +16,7 @@ class ComicWidget extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (_) => ComicDetails(comicDetails: comic)));
+            builder: (_) => ComicDetailsPage(comicDetails: comic)));
       },
       child: Card(
         elevation: 2,

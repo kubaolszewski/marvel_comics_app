@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
             onPressed: () async {
               await showSearch(
                 context: context,
-                delegate: ComicSearchPage(
+                delegate: SearchPageContent(
                   searchPageCubit: SearchPageCubit(),
                 ),
               );
@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) => ListPageCubit()..fetchComics(),
-        child: const ListPage(),
+        child: const ListPageContent(),
       ),
     );
   }

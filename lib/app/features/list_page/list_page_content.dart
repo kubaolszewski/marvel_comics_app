@@ -5,8 +5,8 @@ import 'package:marvel_comics_app/app/common_widgets/comic_widget.dart';
 import 'package:marvel_comics_app/app/features/list_page/cubit/list_page_cubit.dart';
 import 'package:marvel_comics_app/core/enums.dart';
 
-class ListPage extends StatelessWidget {
-  const ListPage({super.key});
+class ListPageContent extends StatelessWidget {
+  const ListPageContent({super.key});
 
   @override
   Widget build(BuildContext context) {

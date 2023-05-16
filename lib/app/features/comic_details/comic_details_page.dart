@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marvel_comics_app/models/single_comic_model.dart';
 
-class ComicDetails extends StatelessWidget {
-  const ComicDetails({super.key, required this.comicDetails});
+class ComicDetailsPage extends StatelessWidget {
+  const ComicDetailsPage({super.key, required this.comicDetails});
 
   final SingleComicModel comicDetails;
 
