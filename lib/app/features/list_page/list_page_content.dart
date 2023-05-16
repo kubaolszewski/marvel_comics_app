@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:marvel_comics_app/app/features/comic_details/comic_details_page.dart';
+import 'package:marvel_comics_app/app/common_widgets/comic_widget.dart';
 import 'package:marvel_comics_app/app/features/list_page/cubit/list_page_cubit.dart';
 import 'package:marvel_comics_app/core/enums.dart';
-import 'package:marvel_comics_app/models/single_comic_model.dart';
 
 class ListPage extends StatelessWidget {
   const ListPage({super.key});
@@ -24,7 +23,7 @@ class ListPage extends StatelessWidget {
               itemCount: comics.length,
               itemBuilder: (context, index) {
                 final comic = comics[index];
-                return _ComicWidget(comic: comic);
+                return ComicWidget(comic: comic);
               },
             );
           } else if (state.comicStatus == Status.error) {
@@ -43,57 +42,6 @@ class ListPage extends StatelessWidget {
             ),
           );
         },
-      ),
-    );
-  }
-}
-
-class _ComicWidget extends StatelessWidget {
-  const _ComicWidget({
-    required this.comic,
-  });
-
-  final SingleComicModel comic;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (_) => ComicDetails(comicDetails: comic)));
-      },
-      child: Card(
-        elevation: 2,
-        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            children: [
-              Container(
-                width: 120,
-                height: 160,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        '${comic.image.path}.${comic.image.extension}'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Text(
-                  comic.title,
-                  style: GoogleFonts.poppins(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const Icon(Icons.arrow_forward),
-            ],
-          ),
-        ),
       ),
     );
   }
