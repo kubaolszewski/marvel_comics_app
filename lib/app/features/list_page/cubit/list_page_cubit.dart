@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:marvel_comics_app/core/enums.dart';
-import 'package:marvel_comics_app/data/remote_data_source.dart';
+import 'package:marvel_comics_app/data/comics_remote_data_source.dart';
 import 'package:marvel_comics_app/models/single_comic_model.dart';
 import 'package:marvel_comics_app/repositories/comics_repository.dart';
 
@@ -10,8 +10,10 @@ part 'list_page_state.dart';
 part 'list_page_cubit.freezed.dart';
 
 class ListPageCubit extends Cubit<ListPageState> {
-  final ComicsRepository comicsRepository =
-      ComicsRepository(comicsRemoteDataSource: ComicsRemoteDataSource());
+  final ComicsRepository comicsRepository = ComicsRepository(
+    comicsRemoteDataSource: ComicsRemoteDataSource(
+    ),
+  );
 
   ListPageCubit() : super(const ListPageState());
 

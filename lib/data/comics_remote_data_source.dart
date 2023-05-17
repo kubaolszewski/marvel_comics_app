@@ -38,3 +38,32 @@ class ComicsRemoteDataSource {
     }
   }
 }
+
+
+// import 'package:retrofit/retrofit.dart';
+
+// part 'comics_remote_data_source.g.dart';
+
+// @RestApi(baseUrl: 'https://gateway.marvel.com/v1/public/')
+// abstract class ComicsRemoteDataSource {
+//   factory ComicsRemoteDataSource(Dio dio, {String baseUrl}) =
+//       _ComicsRemoteDataSource;
+
+//   @GET('/comics')
+//   Future<List<SingleComicModel>> fetchComics(
+//     @Query('ts') int ts,
+//     @Query('apikey') String apiKey,
+//     @Query('hash') String hash,
+//     @Query('limit') int limit,
+//     @Query('offset') int offset,
+//     @Query('orderBy') String orderBy,
+//   );
+
+//   @GET('/comics')
+//   Future<List<SingleComicModel>> searchComicByTitle(
+//     @Query('ts') int ts,
+//     @Query('apikey') String apiKey,
+//     @Query('hash') String hash,
+//     @Query('titleStartsWith') String title,
+//   );
+// }

@@ -1,4 +1,4 @@
-import 'package:marvel_comics_app/data/remote_data_source.dart';
+import 'package:marvel_comics_app/data/comics_remote_data_source.dart';
 import 'package:marvel_comics_app/models/single_comic_model.dart';
 
 class ComicsRepository {
@@ -14,9 +14,10 @@ class ComicsRepository {
     }
   }
 
-  Future<List<SingleComicModel>> searchComicByTitle({required String title}) async {
+  Future<List<SingleComicModel>> searchComicByTitle(
+      {required String title}) async {
     try {
-      return await comicsRemoteDataSource.searchComicByTitle(title:title);
+      return await comicsRemoteDataSource.searchComicByTitle(title: title);
     } catch (error) {
       rethrow;
     }
