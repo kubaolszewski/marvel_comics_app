@@ -25,6 +25,8 @@ mixin _$SingleComicModel {
   ComicThumbnail get image => throw _privateConstructorUsedError;
   @JsonKey(name: 'description')
   String? get description => throw _privateConstructorUsedError;
+  @JsonKey(name: 'urls')
+  List<ComicUrl> get externalLink => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +43,8 @@ abstract class $SingleComicModelCopyWith<$Res> {
   $Res call(
       {String title,
       @JsonKey(name: 'thumbnail') ComicThumbnail image,
-      @JsonKey(name: 'description') String? description});
+      @JsonKey(name: 'description') String? description,
+      @JsonKey(name: 'urls') List<ComicUrl> externalLink});
 
   $ComicThumbnailCopyWith<$Res> get image;
 }
@@ -62,6 +65,7 @@ class _$SingleComicModelCopyWithImpl<$Res, $Val extends SingleComicModel>
     Object? title = null,
     Object? image = null,
     Object? description = freezed,
+    Object? externalLink = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -76,6 +80,10 @@ class _$SingleComicModelCopyWithImpl<$Res, $Val extends SingleComicModel>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      externalLink: null == externalLink
+          ? _value.externalLink
+          : externalLink // ignore: cast_nullable_to_non_nullable
+              as List<ComicUrl>,
     ) as $Val);
   }
 
@@ -99,7 +107,8 @@ abstract class _$$_SingleComicModelCopyWith<$Res>
   $Res call(
       {String title,
       @JsonKey(name: 'thumbnail') ComicThumbnail image,
-      @JsonKey(name: 'description') String? description});
+      @JsonKey(name: 'description') String? description,
+      @JsonKey(name: 'urls') List<ComicUrl> externalLink});
 
   @override
   $ComicThumbnailCopyWith<$Res> get image;
@@ -119,6 +128,7 @@ class __$$_SingleComicModelCopyWithImpl<$Res>
     Object? title = null,
     Object? image = null,
     Object? description = freezed,
+    Object? externalLink = null,
   }) {
     return _then(_$_SingleComicModel(
       null == title
@@ -133,6 +143,10 @@ class __$$_SingleComicModelCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      null == externalLink
+          ? _value._externalLink
+          : externalLink // ignore: cast_nullable_to_non_nullable
+              as List<ComicUrl>,
     ));
   }
 }
@@ -140,9 +154,13 @@ class __$$_SingleComicModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_SingleComicModel extends _SingleComicModel {
-  _$_SingleComicModel(this.title, @JsonKey(name: 'thumbnail') this.image,
-      @JsonKey(name: 'description') this.description)
-      : super._();
+  _$_SingleComicModel(
+      this.title,
+      @JsonKey(name: 'thumbnail') this.image,
+      @JsonKey(name: 'description') this.description,
+      @JsonKey(name: 'urls') final List<ComicUrl> externalLink)
+      : _externalLink = externalLink,
+        super._();
 
   factory _$_SingleComicModel.fromJson(Map<String, dynamic> json) =>
       _$$_SingleComicModelFromJson(json);
@@ -155,10 +173,18 @@ class _$_SingleComicModel extends _SingleComicModel {
   @override
   @JsonKey(name: 'description')
   final String? description;
+  final List<ComicUrl> _externalLink;
+  @override
+  @JsonKey(name: 'urls')
+  List<ComicUrl> get externalLink {
+    if (_externalLink is EqualUnmodifiableListView) return _externalLink;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_externalLink);
+  }
 
   @override
   String toString() {
-    return 'SingleComicModel(title: $title, image: $image, description: $description)';
+    return 'SingleComicModel(title: $title, image: $image, description: $description, externalLink: $externalLink)';
   }
 
   @override
@@ -169,12 +195,15 @@ class _$_SingleComicModel extends _SingleComicModel {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            const DeepCollectionEquality()
+                .equals(other._externalLink, _externalLink));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, title, image, description);
+  int get hashCode => Object.hash(runtimeType, title, image, description,
+      const DeepCollectionEquality().hash(_externalLink));
 
   @JsonKey(ignore: true)
   @override
@@ -194,7 +223,8 @@ abstract class _SingleComicModel extends SingleComicModel {
   factory _SingleComicModel(
           final String title,
           @JsonKey(name: 'thumbnail') final ComicThumbnail image,
-          @JsonKey(name: 'description') final String? description) =
+          @JsonKey(name: 'description') final String? description,
+          @JsonKey(name: 'urls') final List<ComicUrl> externalLink) =
       _$_SingleComicModel;
   _SingleComicModel._() : super._();
 
@@ -209,6 +239,9 @@ abstract class _SingleComicModel extends SingleComicModel {
   @override
   @JsonKey(name: 'description')
   String? get description;
+  @override
+  @JsonKey(name: 'urls')
+  List<ComicUrl> get externalLink;
   @override
   @JsonKey(ignore: true)
   _$$_SingleComicModelCopyWith<_$_SingleComicModel> get copyWith =>
@@ -366,5 +399,154 @@ abstract class _ComicThumbnail implements ComicThumbnail {
   @override
   @JsonKey(ignore: true)
   _$$_ComicThumbnailCopyWith<_$_ComicThumbnail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ComicUrl _$ComicUrlFromJson(Map<String, dynamic> json) {
+  return _ComicUrl.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ComicUrl {
+  String get type => throw _privateConstructorUsedError;
+  String get url => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ComicUrlCopyWith<ComicUrl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ComicUrlCopyWith<$Res> {
+  factory $ComicUrlCopyWith(ComicUrl value, $Res Function(ComicUrl) then) =
+      _$ComicUrlCopyWithImpl<$Res, ComicUrl>;
+  @useResult
+  $Res call({String type, String url});
+}
+
+/// @nodoc
+class _$ComicUrlCopyWithImpl<$Res, $Val extends ComicUrl>
+    implements $ComicUrlCopyWith<$Res> {
+  _$ComicUrlCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+    Object? url = null,
+  }) {
+    return _then(_value.copyWith(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ComicUrlCopyWith<$Res> implements $ComicUrlCopyWith<$Res> {
+  factory _$$_ComicUrlCopyWith(
+          _$_ComicUrl value, $Res Function(_$_ComicUrl) then) =
+      __$$_ComicUrlCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String type, String url});
+}
+
+/// @nodoc
+class __$$_ComicUrlCopyWithImpl<$Res>
+    extends _$ComicUrlCopyWithImpl<$Res, _$_ComicUrl>
+    implements _$$_ComicUrlCopyWith<$Res> {
+  __$$_ComicUrlCopyWithImpl(
+      _$_ComicUrl _value, $Res Function(_$_ComicUrl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+    Object? url = null,
+  }) {
+    return _then(_$_ComicUrl(
+      null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ComicUrl implements _ComicUrl {
+  _$_ComicUrl(this.type, this.url);
+
+  factory _$_ComicUrl.fromJson(Map<String, dynamic> json) =>
+      _$$_ComicUrlFromJson(json);
+
+  @override
+  final String type;
+  @override
+  final String url;
+
+  @override
+  String toString() {
+    return 'ComicUrl(type: $type, url: $url)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ComicUrl &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.url, url) || other.url == url));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, type, url);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ComicUrlCopyWith<_$_ComicUrl> get copyWith =>
+      __$$_ComicUrlCopyWithImpl<_$_ComicUrl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ComicUrlToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ComicUrl implements ComicUrl {
+  factory _ComicUrl(final String type, final String url) = _$_ComicUrl;
+
+  factory _ComicUrl.fromJson(Map<String, dynamic> json) = _$_ComicUrl.fromJson;
+
+  @override
+  String get type;
+  @override
+  String get url;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ComicUrlCopyWith<_$_ComicUrl> get copyWith =>
       throw _privateConstructorUsedError;
 }
