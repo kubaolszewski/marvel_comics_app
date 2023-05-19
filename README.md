@@ -6,7 +6,7 @@ The Marvel Comics App is a mobile application that allows users to explore and d
 
 * Browse a collection of Marvel comic books.
 * Search for comic books by title.
-* View detailed information about each comic, including the title, image, description, and a (sadly not working yet) button with link to more details.
+* View detailed information about each comic, including the title, image, description, and a button with link to external site with more details about selected comic.
 * Easily navigate back to the previous page using the built-in back button.
 * Enjoy a visually appealing design with a Marvel-inspired theme.
 
