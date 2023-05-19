@@ -19,7 +19,7 @@ class SingleComicModel with _$SingleComicModel {
 
   String get descriptionFiltered {
     if (description != null) {
-      return description!.replaceAll(RegExp('<br>.*?<br>'), '');
+      return description!.replaceAll(RegExp(r'<br\s*/?>'), '');
     }
     return '';
   }
