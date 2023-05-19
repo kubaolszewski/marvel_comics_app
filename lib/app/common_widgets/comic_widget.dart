@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marvel_comics_app/app/features/comic_details/comic_details_page.dart';
+import 'package:marvel_comics_app/app/features/comic_details/cubit/comic_details_page_cubit.dart';
+import 'package:marvel_comics_app/data/comics_remote_data_source.dart';
 import 'package:marvel_comics_app/models/single_comic_model.dart';
+import 'package:marvel_comics_app/repositories/comics_repository.dart';
 
 class ComicWidget extends StatelessWidget {
   const ComicWidget({
@@ -16,7 +20,11 @@ class ComicWidget extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (_) => ComicDetailsPage(comicDetails: comic)));
+            builder: (_) => BlocProvider(
+                  create: (context) => ComicDetailsPageCubit(ComicsRepository(
+                      comicsRemoteDataSource: ComicsRemoteDataSource())),
+                  child: ComicDetailsPage(comicDetails: comic),
+                )));
       },
       child: Card(
         elevation: 2,
