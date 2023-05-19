@@ -9,6 +9,7 @@ class SingleComicModel with _$SingleComicModel {
     final String title,
     @JsonKey(name: 'thumbnail') final ComicThumbnail image,
     @JsonKey(name: 'description') String? description,
+    @JsonKey(name: 'urls') final List<ComicUrl> externalLink,
   ) = _SingleComicModel;
 
   factory SingleComicModel.fromJson(Map<String, dynamic> json) =>
@@ -18,7 +19,7 @@ class SingleComicModel with _$SingleComicModel {
 
   String get descriptionFiltered {
     if (description != null) {
-      return description!.replaceAll(RegExp('<br>.*?<br>',), '');
+      return description!.replaceAll(RegExp('<br>.*?<br>'), '');
     }
     return '';
   }
@@ -33,4 +34,15 @@ class ComicThumbnail with _$ComicThumbnail {
 
   factory ComicThumbnail.fromJson(Map<String, dynamic> json) =>
       _$ComicThumbnailFromJson(json);
+}
+
+@freezed
+class ComicUrl with _$ComicUrl {
+  factory ComicUrl(
+    final String type,
+    final String url,
+  ) = _ComicUrl;
+
+  factory ComicUrl.fromJson(Map<String, dynamic> json) =>
+      _$ComicUrlFromJson(json);
 }
