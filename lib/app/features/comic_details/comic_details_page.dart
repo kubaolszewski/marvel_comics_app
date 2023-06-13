@@ -23,7 +23,7 @@ class ComicDetailsPage extends StatelessWidget {
           },
         ),
         title: Text(
-          comicDetails.title,
+          'Marvel Comics App',
           style: GoogleFonts.poppins(
             fontSize: 24,
             fontWeight: FontWeight.bold,
