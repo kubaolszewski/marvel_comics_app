@@ -23,8 +23,9 @@ class ComicDetailsPage extends StatelessWidget {
           },
         ),
         title: Text(
-          comicDetails.title,
+          comicDetails.title.toLowerCase(),
           style: GoogleFonts.poppins(
+            color: Colors.white,
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
