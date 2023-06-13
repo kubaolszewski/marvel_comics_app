@@ -45,6 +45,9 @@ class ComicDetailsPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(comicDetails.title,
+                    style:
+                        GoogleFonts.poppins(fontSize: 28, color: Colors.white, fontWeight: FontWeight.bold)),
                 Expanded(
                   child: Scrollbar(
                     child: SingleChildScrollView(
