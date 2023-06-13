@@ -63,10 +63,10 @@ class ComicDetailsPage extends StatelessWidget {
                   child: TextButton(
                     style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.red),
+                            MaterialStateProperty.all<Color>(Colors.orange),
                         shape: MaterialStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)))),
+                                borderRadius: BorderRadius.circular(16)))),
                     onPressed: () {
                       context
                           .read<ComicDetailsPageCubit>()
