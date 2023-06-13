@@ -25,6 +25,7 @@ class ComicDetailsPage extends StatelessWidget {
         title: Text(
           'Marvel Comics App',
           style: GoogleFonts.poppins(
+            color: Colors.white,
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
@@ -73,7 +74,7 @@ class ComicDetailsPage extends StatelessWidget {
                             MaterialStateProperty.all<Color>(Colors.green),
                         shape: MaterialStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)))),
+                                borderRadius: BorderRadius.circular(16)))),
                     onPressed: () {
                       context
                           .read<ComicDetailsPageCubit>()
