@@ -37,6 +37,7 @@ class ComicWidget extends StatelessWidget {
                 width: 120,
                 height: 160,
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24),
                   image: DecorationImage(
                     image: NetworkImage(
                         '${comic.image.path}.${comic.image.extension}'),
