@@ -23,8 +23,9 @@ class ComicDetailsPage extends StatelessWidget {
           },
         ),
         title: Text(
-          comicDetails.title,
+          'Some Appbar Title',
           style: GoogleFonts.poppins(
+            
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
