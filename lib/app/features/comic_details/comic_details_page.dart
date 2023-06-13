@@ -45,9 +45,13 @@ class ComicDetailsPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(comicDetails.title,
-                    style:
-                        GoogleFonts.poppins(fontSize: 28, color: Colors.white, fontWeight: FontWeight.bold)),
+                Text(
+                  comicDetails.title,
+                  style: GoogleFonts.poppins(
+                      fontSize: 28,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
                 Expanded(
                   child: Scrollbar(
                     child: SingleChildScrollView(
@@ -66,7 +70,7 @@ class ComicDetailsPage extends StatelessWidget {
                   child: TextButton(
                     style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.red),
+                            MaterialStateProperty.all<Color>(Colors.green),
                         shape: MaterialStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)))),
