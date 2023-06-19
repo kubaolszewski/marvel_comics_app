@@ -68,13 +68,10 @@ class ComicDetailsPage extends StatelessWidget {
                 const SizedBox(height: 16),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: TextButton(
+                  child: ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.green),
-                        shape: MaterialStateProperty.all<OutlinedBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16)))),
+                            MaterialStateProperty.all<Color>(Colors.red),),
                     onPressed: () {
                       context
                           .read<ComicDetailsPageCubit>()
