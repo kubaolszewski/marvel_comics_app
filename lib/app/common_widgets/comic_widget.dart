@@ -21,7 +21,7 @@ class ComicWidget extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => ComicDetailsPageCubit(ComicsRepository(
+                  create: (context) => ComicDetailsPageCubit(comicsRepository: ComicsRepository(
                       comicsRemoteDataSource: ComicsRemoteDataSource())),
                   child: ComicDetailsPage(comicDetails: comic),
                 )));

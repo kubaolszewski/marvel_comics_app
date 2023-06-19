@@ -5,6 +5,8 @@ import 'package:marvel_comics_app/app/features/list_page/cubit/list_page_cubit.d
 import 'package:marvel_comics_app/app/features/list_page/list_page_content.dart';
 import 'package:marvel_comics_app/app/features/search_page/cubit/search_page_cubit.dart';
 import 'package:marvel_comics_app/app/features/search_page/search_page_content.dart';
+import 'package:marvel_comics_app/data/comics_remote_data_source.dart';
+import 'package:marvel_comics_app/repositories/comics_repository.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -26,7 +28,7 @@ class HomePage extends StatelessWidget {
               await showSearch(
                 context: context,
                 delegate: SearchPageContent(
-                  searchPageCubit: SearchPageCubit(),
+                  searchPageCubit: SearchPageCubit(comicsRepository: ComicsRepository(comicsRemoteDataSource: ComicsRemoteDataSource())),
                 ),
               );
             },
@@ -48,7 +50,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: BlocProvider(
-        create: (context) => ListPageCubit()..fetchComics(),
+        create: (context) => ListPageCubit(comicsRepository: ComicsRepository(comicsRemoteDataSource: ComicsRemoteDataSource()))..fetchComics(),
         child: const ListPageContent(),
       ),
     );
