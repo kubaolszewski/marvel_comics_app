@@ -28,42 +28,33 @@ void main() {
         SingleComicModel('Spider-Man', image, '', []),
       ];
       const errorMessage = 'No results were found.';
-      group(
-        'successful',
-        () {
-          setUp(() {
-            when(mockComicsRepository.searchComicByTitle(title: 'Spider-Man')).thenAnswer((_) async => searchedComics);
+      const title = 'Spider-Man';
+      blocTest('emits loading state then success state when searched comic is fetched successfully',
+          setUp: (() {
+            when(mockComicsRepository.searchComicByTitle(title: title)).thenAnswer((_) async => searchedComics);
+          }),
+          build: () => searchPageCubit,
+          act: (cubit) => cubit.searchComicByTitle(title: title),
+          expect: () => [
+                const SearchPageLoadingState(),
+                SearchPageLoadedState(searchedComics),
+              ],
+          verify: (cubit) {
+            verify(mockComicsRepository.searchComicByTitle(title: title)).called(1);
           });
-          blocTest(
-            'emits loading state then success state when searched comic is fetched successfully',
-            build: () => searchPageCubit,
-            act: (cubit) => cubit.searchComicByTitle(title: 'Spider-Man'),
-            expect: () => [
-              const SearchPageLoadingState(),
-              SearchPageLoadedState(searchedComics),
-            ],
-          );
-        },
-      );
-
-      group(
-        'unsuccessful',
-        () {
-          setUp(() {
-            when(mockComicsRepository.searchComicByTitle(title: 'Spider-Man'))
-                .thenThrow(Exception(errorMessage));
+      blocTest('emits loading state then error state when searched comic is fetched unsuccessfully',
+          setUp: (() {
+            when(mockComicsRepository.searchComicByTitle(title: title)).thenThrow(Exception(errorMessage));
+          }),
+          build: () => searchPageCubit,
+          act: (cubit) => cubit.searchComicByTitle(title: title),
+          expect: () => [
+                const SearchPageLoadingState(),
+                const SearchPageErrorState(errorMessage),
+              ],
+          verify: (cubit) {
+            verify(mockComicsRepository.searchComicByTitle(title: title)).called(1);
           });
-          blocTest(
-            'emits loading state then error state when searched comic is fetched unsuccessfully',
-            build: () => searchPageCubit,
-            act: (cubit) => cubit.searchComicByTitle(title: 'Spider-Man'),
-            expect: () => [
-              const SearchPageLoadingState(),
-              const SearchPageErrorState(errorMessage),
-            ],
-          );
-        },
-      );
     },
   );
 }

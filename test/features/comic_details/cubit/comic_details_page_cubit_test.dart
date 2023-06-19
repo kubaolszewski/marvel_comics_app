@@ -19,35 +19,34 @@ void main() {
   });
   group('redirectToExternalSite', () {
     const String externalLink = 'externalLink';
-    group('success', () {
-      setUp(() {
-        when(mockComicsRepository.redirectToExternalSite(externalLink: externalLink));
-      });
-      blocTest(
+    blocTest(
         'emits Status.loading then Status.success when redirecting'
         'to external site',
+        setUp: (() {
+          when(mockComicsRepository.redirectToExternalSite(externalLink: externalLink));
+        }),
         build: () => comicDetailsPageCubit,
         act: (cubit) => cubit.redirectToExternalSite(externalLink: externalLink),
         expect: () => [
-          const ComicDetailsPageState(status: Status.loading),
-          const ComicDetailsPageState(status: Status.success),
-        ],
-      );
-    });
-    group('unsuccessul', () {
-      setUp(() {
-        when(mockComicsRepository.redirectToExternalSite(externalLink: externalLink)).thenAnswer((_) => throw Exception('test-exception-error'));
-      });
-      blocTest(
-        'emits Status.loading then Status.error when redirecting'
-        'to external site',
-        build: () => comicDetailsPageCubit,
-        act: (cubit) => cubit.redirectToExternalSite(externalLink: externalLink),
-        expect: () => [
-          const ComicDetailsPageState(status: Status.loading),
-          const ComicDetailsPageState(status: Status.error, errorMessage: 'Exception: test-exception-error'),
-        ],
-      );
-    });
+              const ComicDetailsPageState(status: Status.loading),
+              const ComicDetailsPageState(status: Status.success),
+            ],
+        verify: (cubit) {
+          verify(mockComicsRepository.redirectToExternalSite(externalLink: externalLink)).called(1);
+        });
+    blocTest(
+      'emits Status.loading then Status.error when redirecting'
+      'to external site',
+      setUp: (() {
+        when(mockComicsRepository.redirectToExternalSite(externalLink: externalLink))
+            .thenAnswer((_) => throw Exception('test-exception-error'));
+      }),
+      build: () => comicDetailsPageCubit,
+      act: (cubit) => cubit.redirectToExternalSite(externalLink: externalLink),
+      expect: () => [
+        const ComicDetailsPageState(status: Status.loading),
+        const ComicDetailsPageState(status: Status.error, errorMessage: 'Exception: test-exception-error'),
+      ],
+    );
   });
 }

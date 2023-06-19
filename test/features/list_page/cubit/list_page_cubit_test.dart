@@ -27,49 +27,47 @@ void main() {
       SingleComicModel('title3', image, 'description', []),
     ];
     const errorMessage = 'Failed to fetch comics.';
-    group('successful', () {
-      setUp(() {
-        when(mockComicsRepository.fetchComics()).thenAnswer((_) async => comics);
-      });
-      blocTest<ListPageCubit, ListPageState>(
-          'emits Status.loading then Status.success when fetchComics() is called successfully.',
-          build: () => listPageCubit,
-          act: (cubit) => cubit.fetchComics(),
-          expect: () => [
-                const ListPageState(
-                  comicStatus: Status.loading,
-                ),
-                ListPageState(
-                  comicStatus: Status.success,
-                  comics: comics,
-                ),
-              ],
-          verify: (_cubit) {
-            verify(mockComicsRepository.fetchComics()).called(1);
-          });
-    });
-
-    group('unsuccessful', () {
-      setUp(() {
-        when(mockComicsRepository.fetchComics()).thenThrow(
-          Exception(errorMessage),
-        );
-      });
-    });
     blocTest<ListPageCubit, ListPageState>(
-      'emits Status.loading then Status.error with error message'
-      'when fetchComics() is called unsuccessfully.',
-      build: () => listPageCubit,
-      act: (cubit) => cubit.fetchComics(),
-      expect: () => [
-        const ListPageState(
-          comicStatus: Status.loading,
-        ),
-        const ListPageState(
-          comicStatus: Status.error,
-          errorMessage: errorMessage,
-        )
-      ],
-    );
+        'emits Status.loading then Status.success'
+        'when fetchComics() is called successfully.',
+        setUp: (() {
+          when(mockComicsRepository.fetchComics()).thenAnswer((_) async => comics);
+        }),
+        build: () => listPageCubit,
+        act: (cubit) => cubit.fetchComics(),
+        expect: () => [
+              const ListPageState(
+                comicStatus: Status.loading,
+              ),
+              ListPageState(
+                comicStatus: Status.success,
+                comics: comics,
+              ),
+            ],
+        verify: (cubit) {
+          verify(mockComicsRepository.fetchComics()).called(1);
+        });
+    blocTest<ListPageCubit, ListPageState>(
+        'emits Status.loading then Status.error with error message'
+        'when fetchComics() is called unsuccessfully.',
+        setUp: (() {
+          when(mockComicsRepository.fetchComics()).thenThrow(
+            Exception(errorMessage),
+          );
+        }),
+        build: () => listPageCubit,
+        act: (cubit) => cubit.fetchComics(),
+        expect: () => [
+              const ListPageState(
+                comicStatus: Status.loading,
+              ),
+              const ListPageState(
+                comicStatus: Status.error,
+                errorMessage: errorMessage,
+              )
+            ],
+        verify: (cubit) {
+          verify(mockComicsRepository.fetchComics()).called(1);
+        });
   });
 }
