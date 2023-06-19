@@ -32,19 +32,21 @@ void main() {
         when(mockComicsRepository.fetchComics()).thenAnswer((_) async => comics);
       });
       blocTest<ListPageCubit, ListPageState>(
-        'emits Status.loading then Status.success when fetchComics() is called successfully.',
-        build: () => listPageCubit,
-        act: (cubit) => cubit.fetchComics(),
-        expect: () => [
-          const ListPageState(
-            comicStatus: Status.loading,
-          ),
-          ListPageState(
-            comicStatus: Status.success,
-            comics: comics,
-          ),
-        ],
-      );
+          'emits Status.loading then Status.success when fetchComics() is called successfully.',
+          build: () => listPageCubit,
+          act: (cubit) => cubit.fetchComics(),
+          expect: () => [
+                const ListPageState(
+                  comicStatus: Status.loading,
+                ),
+                ListPageState(
+                  comicStatus: Status.success,
+                  comics: comics,
+                ),
+              ],
+          verify: (_cubit) {
+            verify(mockComicsRepository.fetchComics()).called(1);
+          });
     });
 
     group('unsuccessful', () {
@@ -64,7 +66,7 @@ void main() {
           comicStatus: Status.loading,
         ),
         const ListPageState(
-          comicStatus:Status.error,
+          comicStatus: Status.error,
           errorMessage: errorMessage,
         )
       ],
