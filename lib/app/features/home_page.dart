@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
               await showSearch(
                 context: context,
                 delegate: SearchPageContent(
-                  searchPageCubit: SearchPageCubit(),
+                  searchPageCubit: SearchPageCubit(comicsRepository: ComicsRepository(comicsRemoteDataSource: ComicsRemoteDataSource())),
                 ),
               );
             },
