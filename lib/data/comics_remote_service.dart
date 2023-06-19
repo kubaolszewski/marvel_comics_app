@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:marvel_comics_app/data/api_client.dart';
 import 'package:marvel_comics_app/data/fetch_comics_response.dart';
-import 'package:marvel_comics_app/models/single_comic_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'comics_remote_service.g.dart';
@@ -14,7 +13,7 @@ abstract class ComicsRemoteService {
   Future<FetchComicsResponse> fetchComics();
 
   @GET('/comics')
-  Future<List<SingleComicModel>> searchComicByTitle(
+  Future<FetchComicsResponse> searchComicByTitle(
     @Query('titleStartsWith') String title,
   );
 }

@@ -42,13 +42,13 @@ class _ComicsRemoteService implements ComicsRemoteService {
   }
 
   @override
-  Future<List<SingleComicModel>> searchComicByTitle(String title) async {
+  Future<FetchComicsResponse> searchComicByTitle(String title) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'titleStartsWith': title};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<SingleComicModel>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<FetchComicsResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -60,10 +60,7 @@ class _ComicsRemoteService implements ComicsRemoteService {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!
-        .map(
-            (dynamic i) => SingleComicModel.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = FetchComicsResponse.fromJson(_result.data!);
     return value;
   }
 

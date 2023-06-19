@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:marvel_comics_app/models/single_comic_model.dart';
 
-
 part 'fetch_comics_response.g.dart';
 part 'fetch_comics_response.freezed.dart';
 
@@ -15,8 +14,6 @@ class FetchComicsData with _$FetchComicsData{
       _$FetchComicsDataFromJson(json);
 }
 
-
-
 @freezed
 class FetchComicsResponse with _$FetchComicsResponse{
   factory FetchComicsResponse (
@@ -25,5 +22,4 @@ class FetchComicsResponse with _$FetchComicsResponse{
 
   factory FetchComicsResponse.fromJson(Map<String, dynamic> json) =>
       _$FetchComicsResponseFromJson(json);
-   
 }
