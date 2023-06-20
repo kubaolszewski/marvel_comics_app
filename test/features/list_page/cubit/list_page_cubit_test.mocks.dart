@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:marvel_comics_app/data/comics_remote_data_source.dart' as _i2;
+import 'package:marvel_comics_app/data/comics_remote_service.dart' as _i2;
 import 'package:marvel_comics_app/models/single_comic_model.dart' as _i5;
 import 'package:marvel_comics_app/repositories/comics_repository.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
@@ -21,9 +21,9 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeComicsRemoteDataSource_0 extends _i1.SmartFake
-    implements _i2.ComicsRemoteDataSource {
-  _FakeComicsRemoteDataSource_0(
+class _FakeComicsRemoteService_0 extends _i1.SmartFake
+    implements _i2.ComicsRemoteService {
+  _FakeComicsRemoteService_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -41,13 +41,13 @@ class MockComicsRepository extends _i1.Mock implements _i3.ComicsRepository {
   }
 
   @override
-  _i2.ComicsRemoteDataSource get comicsRemoteDataSource => (super.noSuchMethod(
-        Invocation.getter(#comicsRemoteDataSource),
-        returnValue: _FakeComicsRemoteDataSource_0(
+  _i2.ComicsRemoteService get comicsRemoteService => (super.noSuchMethod(
+        Invocation.getter(#comicsRemoteService),
+        returnValue: _FakeComicsRemoteService_0(
           this,
-          Invocation.getter(#comicsRemoteDataSource),
+          Invocation.getter(#comicsRemoteService),
         ),
-      ) as _i2.ComicsRemoteDataSource);
+      ) as _i2.ComicsRemoteService);
   @override
   _i4.Future<List<_i5.SingleComicModel>> fetchComics() => (super.noSuchMethod(
         Invocation.method(

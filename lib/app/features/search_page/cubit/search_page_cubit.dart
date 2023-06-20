@@ -10,7 +10,7 @@ part 'search_page_cubit.freezed.dart';
 class SearchPageCubit extends Cubit<SearchPageState> {
   final ComicsRepository comicsRepository;
 
-  SearchPageCubit({required this.comicsRepository}) : super(const SearchPageState());
+  SearchPageCubit(this.comicsRepository) : super(const SearchPageState());
 
   Future<void> searchComicByTitle({required String title}) async {
     emit(const SearchPageLoadingState());

@@ -11,7 +11,7 @@ part 'list_page_cubit.freezed.dart';
 class ListPageCubit extends Cubit<ListPageState> {
   final ComicsRepository comicsRepository;
 
-  ListPageCubit({required this.comicsRepository}) : super(const ListPageState());
+  ListPageCubit(this.comicsRepository) : super(const ListPageState());
 
   Future<void> fetchComics() async {
     emit(const ListPageState(comicStatus: Status.loading));
