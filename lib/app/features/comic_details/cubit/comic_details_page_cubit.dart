@@ -8,19 +8,15 @@ part 'comic_details_page_cubit.freezed.dart';
 
 class ComicDetailsPageCubit extends Cubit<ComicDetailsPageState> {
   final ComicsRepository comicsRepository;
-  ComicDetailsPageCubit({required this.comicsRepository})
-      : super(const ComicDetailsPageState());
+  ComicDetailsPageCubit(this.comicsRepository) : super(const ComicDetailsPageState());
 
-
-  Future<void> redirectToExternalSite({required String externalLink}) async {
+  void redirectToExternalSite({required String externalLink}) {
     emit(const ComicDetailsPageState(status: Status.loading));
     try {
-      await comicsRepository.redirectToExternalSite(
-          externalLink: externalLink);
+      comicsRepository.redirectToExternalSite(externalLink: externalLink);
       emit(const ComicDetailsPageState(status: Status.success));
     } catch (error) {
-      emit(ComicDetailsPageState(
-          status: Status.error, errorMessage: error.toString()));
+      emit(ComicDetailsPageState(status: Status.error, errorMessage: error.toString()));
     }
   }
 }
