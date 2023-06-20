@@ -8,16 +8,17 @@ class ComicsRepository {
   final ComicsRemoteService comicsRemoteService;
 
   Future<List<SingleComicModel>> fetchComics() async {
-      return (await comicsRemoteService.fetchComics()).data.results;
+    return (await comicsRemoteService.fetchComics()).data.results;
   }
 
   Future<List<SingleComicModel>> searchComicByTitle({required String title}) async {
-      return (await comicsRemoteService.searchComicByTitle(title)).data.results;
+    return (await comicsRemoteService.searchComicByTitle(title)).data.results;
   }
 
   Future<void> redirectToExternalSite({required String externalLink}) async {
     try {
-      if (!await launchUrlString(externalLink)) {
+      final linkHasLaunched = await launchUrlString(externalLink);
+      if (!linkHasLaunched) {
         throw Exception('Could not launch external link');
       }
     } catch (error) {
