@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.marvel_comics_app">
+    package="com.kubaolszewski.marvel_comics_app">
    <application
         android:label="marvel_comics_app"
         android:name="${applicationName}"

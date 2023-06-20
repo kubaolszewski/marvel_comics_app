@@ -8,7 +8,7 @@
 PRODUCT_NAME = marvel_comics_app
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.marvelComicsApp
+PRODUCT_BUNDLE_IDENTIFIER = com.kubaolszewski.marvelComicsApp
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 com.kubaolszewski. All rights reserved.

@@ -1,4 +1,4 @@
-package com.example.marvel_comics_app
+package com.kubaolszewski.marvel_comics_app
 
 import io.flutter.embedding.android.FlutterActivity
 
