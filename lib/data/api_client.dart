@@ -13,14 +13,11 @@ class ApiClient {
     final dio = Dio(
       BaseOptions(
         baseUrl: 'https://gateway.marvel.com/v1/public/',
-        receiveTimeout: const Duration(seconds: 300),
-        connectTimeout: const Duration(seconds: 300),
-        sendTimeout: const Duration(seconds: 300),
         queryParameters: {
           'ts': '1',
           'apikey': '080a502746c8a60aeab043387a56eef0',
           'hash': '6edc18ab1a954d230c1f03c590d469d2',
-          'limit': '25',
+          'limit': '15',
           'offset': '0',
           'orderBy': '-onsaleDate',
         },

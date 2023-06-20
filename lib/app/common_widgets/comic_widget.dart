@@ -23,7 +23,7 @@ class ComicWidget extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (_) => BlocProvider(
-              create: (context) => ComicDetailsPageCubit(
+              create: (context) => ComicDetailsPageCubit(comicsRepository:
                 ComicsRepository(
                   comicsRemoteService: ComicsRemoteService.create(
                     ApiClient(),

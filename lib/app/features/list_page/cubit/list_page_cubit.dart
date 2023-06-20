@@ -22,9 +22,16 @@ class ListPageCubit extends Cubit<ListPageState> {
 
     try {
       final comics = await comicsRepository.fetchComics();
-      emit(ListPageState(comics: comics, comicStatus: Status.success));
+      emit(
+        ListPageState(comics: comics, comicStatus: Status.success),
+      );
     } catch (error) {
-      emit(ListPageState(errorMessage: error.toString()));
+      emit(
+        const ListPageState(
+          comicStatus: Status.error,
+          errorMessage: 'Failed to fetch comics.',
+        ),
+      );
     }
   }
 }

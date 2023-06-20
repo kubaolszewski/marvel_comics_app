@@ -28,7 +28,7 @@ class ComicDetailsPage extends StatelessWidget {
         title: Text(
           'Marvel Comics App',
           style: GoogleFonts.poppins(
-            color: Colors.white,
+            color: Colors.black,
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
@@ -47,7 +47,7 @@ class ComicDetailsPage extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             color: Colors.black.withOpacity(0.7),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   comicDetails.title,
